@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
 
   vst2sdk = fetchzip {
     url = "https://archive.org/download/VST2SDK/vst_sdk2_4_rev2.zip";
-    hash = "sha256-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=";
+    hash = "sha256-6eDJYGfuVczOTaZNUYa/dLEoCzl6Ysi1I1NrxuN2mPQ=";
   };
 
   nativeBuildInputs = [ cmake libxml2 ];

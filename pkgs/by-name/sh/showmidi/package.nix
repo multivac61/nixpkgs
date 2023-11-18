@@ -8,6 +8,7 @@
 , freetype
 , fetchzip
 , libxml2
+, clap-juce-extensions
 , xorg
 , ...
 }:
@@ -29,10 +30,13 @@ stdenv.mkDerivation rec {
     hash = "sha256-6eDJYGfuVczOTaZNUYa/dLEoCzl6Ysi1I1NrxuN2mPQ=";
   };
 
+  cmakeFlags = [ "-DCLAP_JUCE_EXTENSIONS_BUILD_EXAMPLES=OFF" ];
+
   nativeBuildInputs = [ cmake libxml2 ];
 
   buildInputs = [
     juce
+    clap-juce-extensions
     pkg-config
     alsaLib
     freetype
@@ -44,6 +48,8 @@ stdenv.mkDerivation rec {
 
   buildPhase = ''
     ln -s ${vst2sdk} libs/vst2
+
+    PATH_TO_JUCE=JUCE
 
     # Makefile build
     pushd Builds/LinuxMakefile

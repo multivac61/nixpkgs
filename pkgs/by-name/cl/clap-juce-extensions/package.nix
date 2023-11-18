@@ -17,6 +17,8 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
+  cmakeFlags = [ "-DCLAP_JUCE_EXTENSIONS_BUILD_EXAMPLES=OFF" ];
+
   nativeBuildInputs = [
     cmake
   ];

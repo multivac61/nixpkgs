@@ -3,7 +3,7 @@
 , fetchFromGitHub
 , cmake
 , juce
-, pkgconfig
+, pkg-config
 , alsaLib
 , freetype
 , fetchzip
@@ -35,7 +35,7 @@ stdenv.mkDerivation rec {
   buildInputs = [
     juce
     clap-juce-extensions
-    pkgconfig
+    pkg-config
     alsaLib
     freetype
     xorg.libX11

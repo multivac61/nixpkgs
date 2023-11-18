@@ -11,6 +11,7 @@
 , libXinerama
 , libXcursor
 , libxml2
+, clap-juce-extensions
 , ...
 }:
 
@@ -30,6 +31,7 @@ stdenv.mkDerivation rec {
 
   buildInputs = [
     juce
+    clap-juce-extensions
     pkgconfig
     alsaLib
     freetype

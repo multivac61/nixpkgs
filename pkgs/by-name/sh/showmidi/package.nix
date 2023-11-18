@@ -8,7 +8,6 @@
 , freetype
 , fetchzip
 , libxml2
-, clap-juce-extensions
 , xorg
 , ...
 }:
@@ -34,7 +33,6 @@ stdenv.mkDerivation rec {
 
   buildInputs = [
     juce
-    clap-juce-extensions
     pkg-config
     alsaLib
     freetype

@@ -6,12 +6,10 @@
 , pkgconfig
 , alsaLib
 , freetype
-, libX11
-, libXrandr
-, libXinerama
-, libXcursor
+, fetchzip
 , libxml2
 , clap-juce-extensions
+, xorg
 , ...
 }:
 
@@ -27,6 +25,11 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
+  vst2sdk = fetchzip {
+    url = "https://archive.org/download/VST2SDK/vst_sdk2_4_rev2.zip";
+    hash = "sha256-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=";
+  };
+
   nativeBuildInputs = [ cmake libxml2 ];
 
   buildInputs = [
@@ -35,15 +38,14 @@ stdenv.mkDerivation rec {
     pkgconfig
     alsaLib
     freetype
-    libX11
-    libXrandr
-    libXinerama
-    libXcursor
+    xorg.libX11
+    xorg.xrandr
+    xorg.libXinerama
+    xorg.libXcursor
   ];
 
   buildPhase = ''
-    # Clean build directories
-    rm -rf Builds/LinuxMakefile/build/
+    mv ${vst2sdk} libs/vst2
 
     # Makefile build
     pushd Builds/LinuxMakefile

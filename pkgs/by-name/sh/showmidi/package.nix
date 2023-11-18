@@ -43,7 +43,7 @@ stdenv.mkDerivation rec {
   ];
 
   buildPhase = ''
-    mv ${vst2sdk} libs/vst2
+    ln -s ${vst2sdk} libs/vst2
 
     # Makefile build
     pushd Builds/LinuxMakefile

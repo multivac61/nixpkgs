@@ -46,19 +46,14 @@ stdenv.mkDerivation rec {
     xorg.libXcursor
   ];
 
-  buildPhase = ''
+  prePatch = ''
+    substituteInPlace Scripts/build-linux.sh --replace '$PROJECT_DIR/JUCE' '${juce}'
+    substituteInPlace Scripts/build-linux.sh --replace '$1' '${version}'
     ln -s ${vst2sdk} libs/vst2
+  '';
 
-    PATH_TO_JUCE=JUCE
-
-    # Makefile build
-    pushd Builds/LinuxMakefile
-    make CONFIG=Release
-    popd
-
-    # CMake build
-    cmake -BBuilds/LinuxMakefile/build/clap -DCMAKE_BUILD_TYPE=Release
-    cmake --build Builds/LinuxMakefile/build/clap --config Release
+  buildPhase = ''
+    chmod +x Scripts/build-linux.sh && ./Scripts/build-linux.sh
   '';
 
   installPhase = ''

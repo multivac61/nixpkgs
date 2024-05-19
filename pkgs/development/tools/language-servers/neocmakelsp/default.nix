@@ -20,7 +20,7 @@ rustPlatform.buildRustPackage rec {
     description = "A cmake lsp based on tower-lsp and treesitter";
     homepage = "https://github.com/Decodetalkers/neocmakelsp";
     license = licenses.mit;
-    platforms = platforms.linux;
+    platforms = platforms.linux ++ platforms.darwin;
     maintainers = with maintainers; [ rewine ];
     mainProgram = "neocmakelsp";
   };

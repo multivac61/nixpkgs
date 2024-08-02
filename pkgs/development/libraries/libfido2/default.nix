@@ -29,13 +29,14 @@ stdenv.mkDerivation rec {
     ++ lib.optionals stdenv.isLinux [ udev ]
     ++ lib.optionals (stdenv.isLinux && withPcsclite) [ pcsclite ];
 
-  propagatedBuildInputs = [ openssl ];
+  propagatedBuildInputs = [ openssl hidapi ];
 
   outputs = [ "out" "dev" "man" ];
 
   cmakeFlags = [
     "-DUDEV_RULES_DIR=${placeholder "out"}/etc/udev/rules.d"
     "-DCMAKE_INSTALL_LIBDIR=lib"
+    "-DCMAKE_INSTALL_INCLUDEDIR=include"
   ] ++ lib.optionals stdenv.isDarwin [
     "-DUSE_HIDAPI=1"
   ] ++ lib.optionals stdenv.isLinux [

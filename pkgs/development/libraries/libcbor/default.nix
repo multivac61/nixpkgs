@@ -4,11 +4,12 @@
 , cmake
 , cmocka
 
-# for passthru.tests
+  # for passthru.tests
 , libfido2
 , mysql80
 , openssh
 , systemd
+, static ? stdenv.hostPlatform.isStatic
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -32,7 +33,7 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   cmakeFlags = lib.optional finalAttrs.finalPackage.doCheck "-DWITH_TESTS=ON"
-    ++ lib.optional (!stdenv.hostPlatform.isStatic) "-DBUILD_SHARED_LIBS=ON";
+    ++ lib.optional (!static) "-DBUILD_SHARED_LIBS=ON";
 
   # Tests are restricted while pkgsStatic.cmocka is broken. Tracked at:
   # https://github.com/NixOS/nixpkgs/issues/213623
